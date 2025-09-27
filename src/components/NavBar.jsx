@@ -14,6 +14,31 @@ export const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Handle navigation clicks so HashRouter (which uses the hash) doesn't treat
+  // fragment anchors like "#hero" as route changes. We prevent the default
+  // browser/hash behavior and perform a smooth scroll to the target instead.
+  const handleNavClick = (e, href) => {
+    // Allow modifier keys to behave normally (open in new tab etc.)
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    const id = href?.startsWith("#") ? href.slice(1) : href;
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // If element not found, as a fallback try to set location.hash without router navigation
+      try {
+        // This may still be interpreted by HashRouter; we avoid it normally
+        window.location.hash = `#${id}`;
+      } catch (err) {
+        // no-op
+      }
+    }
+    // Close mobile menu after navigation
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -44,8 +69,9 @@ export const NavBar = () => {
         <div className="hidden md:flex space-x-8">
           {navItems.map((item, key) => (
             <a
-              key={key}
+              key={item.name}
               href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
               className="text-foreground/80 hover:text-primary transition-colors duration-300"
             >
               {item.name}
@@ -78,10 +104,10 @@ export const NavBar = () => {
           <div className="flex flex-col space-y-8 text-xl">
             {navItems.map((item, key) => (
               <a
-                key={key}
+                key={item.name}
                 href={item.href}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
               </a>
