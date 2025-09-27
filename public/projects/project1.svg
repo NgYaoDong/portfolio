@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g1)" rx="16"/>
+  <g fill="#ffffff" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="600">
+    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="48">Project 1</text>
+    <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-size="20" opacity="0.9">Placeholder image — 1200×675</text>
+  </g>
+</svg>
