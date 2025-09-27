@@ -1,11 +1,13 @@
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 
+const base = import.meta.env.BASE_URL || "/";
+
 const projects = [
   {
     id: 1,
     title: "Project One",
     description: "A brief description of Project One.",
-    imageUrl: "../../public/projects/project1.svg",
+    imageUrl: `${base}projects/project1.svg`,
     projectUrl: "https://project-one.com",
     githubUrl: "https://github.com/user/project-one",
     tags: ["React", "Node.js", "CSS"],
@@ -14,7 +16,7 @@ const projects = [
     id: 2,
     title: "Project Two",
     description: "A brief description of Project Two.",
-    imageUrl: "../../public/projects/project2.svg",
+    imageUrl: `${base}projects/project2.svg`,
     projectUrl: "https://project-two.com",
     githubUrl: "https://github.com/user/project-two",
     tags: ["Next.js", "Tailwind CSS", "GraphQL"],
@@ -23,7 +25,7 @@ const projects = [
     id: 3,
     title: "Project Three",
     description: "A brief description of Project Three.",
-    imageUrl: "../../public/projects/project3.svg",
+    imageUrl: `${base}projects/project3.svg`,
     projectUrl: "https://project-three.com",
     githubUrl: "https://github.com/user/project-three",
     tags: ["Vue", "Firebase", "Sass"],
