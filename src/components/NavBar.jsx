@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, handleRedirect } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -15,30 +15,8 @@ export const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle navigation clicks so HashRouter (which uses the hash) doesn't treat
-  // fragment anchors like "#hero" as route changes. We prevent the default
-  // browser/hash behavior and perform a smooth scroll to the target instead.
-  const handleNavClick = (e, href) => {
-    // Allow modifier keys to behave normally (open in new tab etc.)
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    const id = href?.startsWith("#") ? href.slice(1) : href;
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      // If element not found, as a fallback try to set location.hash without router navigation
-      try {
-        // This may still be interpreted by HashRouter; we avoid it normally
-        window.location.hash = `#${id}`;
-      } catch {
-        // no-op
-      }
-    }
-    // Close mobile menu after navigation
-    setIsMenuOpen(false);
-  };
+  const handleNavClick = (e, href) =>
+    handleRedirect(e, href, { onNavigate: () => setIsMenuOpen(false) });
 
   useEffect(() => {
     const handleScroll = () => {
