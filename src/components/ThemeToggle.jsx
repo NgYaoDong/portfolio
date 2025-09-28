@@ -42,9 +42,10 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed hidden md:block top-4 right-4 z-60 p-2 rounded-full transition-colors duration-300",
+        "fixed hidden md:inline-flex items-center justify-center p-2 rounded-full transition-colors duration-300",
         "focus:outline-hidden"
       )}
+      aria-label={isDarkMode ? "Switch to light theme" : "Switch to dark theme"}
     >
       {isDarkMode ? (
         <Sun className="h-6 w-6 text-yellow-300" />

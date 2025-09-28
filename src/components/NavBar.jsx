@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -31,7 +32,7 @@ export const NavBar = () => {
       try {
         // This may still be interpreted by HashRouter; we avoid it normally
         window.location.hash = `#${id}`;
-      } catch (err) {
+      } catch {
         // no-op
       }
     }
@@ -65,11 +66,11 @@ export const NavBar = () => {
           </span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
+        {/* Desktop Nav + controls */}
+        <div className="hidden md:flex items-center space-x-8 ">
+          <div className="flex items-center space-x-8">
+          {navItems.map((item) => (
             <a
-              key={item.name}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
               className="text-foreground/80 hover:text-primary transition-colors duration-300"
@@ -77,6 +78,11 @@ export const NavBar = () => {
               {item.name}
             </a>
           ))}
+          </div>
+
+          <div className="flex items-center">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile Nav */}
@@ -102,9 +108,8 @@ export const NavBar = () => {
           )}
         >
           <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
+            {navItems.map((item) => (
               <a
-                key={item.name}
                 href={item.href}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300"
                 onClick={(e) => handleNavClick(e, item.href)}
