@@ -1,4 +1,5 @@
 import { BriefcaseBusiness, Code, User } from "lucide-react";
+import { handleRedirect } from "../lib/utils";
 
 export const AboutSection = () => {
   return (
@@ -17,11 +18,11 @@ export const AboutSection = () => {
               Node.js, and other cutting-edge technologies.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
+              <a onClick={(e) => handleRedirect(e, "#contact")} className="cosmic-button">
                 Get in Touch
               </a>
               <a
-                href="/resume.pdf"
+                href="https://ngyaodong.github.io/portfolio/docs/resume.pdf"
                 target="_blank"
                 className="cosmic-button-outline"
               >
